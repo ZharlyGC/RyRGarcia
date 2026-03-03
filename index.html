@@ -1,11 +1,241 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="es">
 <head>
-<title>RYR GARCIA</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RYR GARCÍA | Catálogo de Compresores</title>
+  <meta name="description" content="Catálogo de compresores nuevos. Cotiza por WhatsApp. Envíos a todo México." />
+  <style>
+    :root{
+      --bg:#0b0f14; --card:#121a24; --muted:#9fb0c0; --text:#e9f0f7;
+      --accent:#22c55e; --line:#1f2a37; --chip:#0f172a;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial;
+      background:radial-gradient(1000px 600px at 20% -10%, #122033 0%, transparent 60%), var(--bg);
+      color:var(--text);
+    }
+    a{color:inherit}
+    .wrap{max-width:1100px;margin:0 auto;padding:28px 16px 90px}
+    header{display:flex;gap:16px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+    .brand h1{margin:0;font-size:28px;letter-spacing:.5px}
+    .brand p{margin:6px 0 0;color:var(--muted)}
+    .pillbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .pill{border:1px solid var(--line);background:rgba(18,26,36,.7);padding:8px 10px;border-radius:999px;
+      color:var(--muted);font-size:13px}
+    .hero{margin-top:22px;border:1px solid var(--line);background:rgba(18,26,36,.65);
+      border-radius:18px;padding:18px}
+    .hero strong{color:#fff}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .btn{border:1px solid var(--line);background:#0f172a;color:#fff;padding:10px 12px;border-radius:12px;
+      text-decoration:none;font-weight:600;font-size:14px}
+    .btn.primary{background:linear-gradient(180deg, #22c55e 0%, #16a34a 100%);border:none;color:#06230f}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:18px}
+    .filters{grid-column:span 12;border:1px solid var(--line);background:rgba(18,26,36,.65);
+      border-radius:18px;padding:14px}
+    .filters-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .filters input,.filters select{
+      background:#0b1220;border:1px solid var(--line);color:var(--text);
+      padding:10px 12px;border-radius:12px;outline:none;font-size:14px
+    }
+    .filters input{flex:1;min-width:220px}
+    .filters small{color:var(--muted)}
+    .cards{grid-column:span 12;display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+    .card{grid-column:span 12;border:1px solid var(--line);background:rgba(18,26,36,.75);
+      border-radius:18px;padding:14px;display:flex;gap:14px;justify-content:space-between;flex-wrap:wrap}
+    @media(min-width:720px){ .card{grid-column:span 6} }
+    @media(min-width:1020px){ .card{grid-column:span 4} }
+    .card h3{margin:0 0 8px;font-size:16px;letter-spacing:.4px}
+    .meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .chip{background:rgba(15,23,42,.9);border:1px solid var(--line);color:var(--muted);
+      padding:6px 8px;border-radius:999px;font-size:12px}
+    .price{font-size:16px;font-weight:800;margin-top:10px}
+    .note{color:var(--muted);font-size:12px;margin-top:4px}
+    .right{display:flex;flex-direction:column;justify-content:space-between;min-width:160px}
+    .cta{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .cta a{display:inline-block;text-align:center}
+    footer{margin-top:22px;color:var(--muted);font-size:13px}
+    /* WhatsApp floating button */
+    .wa-float{
+      position:fixed;right:16px;bottom:16px;z-index:50;
+      background:linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
+      color:#06230f;border:none;border-radius:999px;padding:14px 16px;
+      display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:900;
+      box-shadow:0 10px 30px rgba(34,197,94,.22);
+    }
+    .wa-icon{width:22px;height:22px;display:inline-block}
+    .hidden{display:none !important}
+  </style>
 </head>
 <body>
-<h1>RYR GARCIA</h1>
-<p>Especialistas en Compresores</p>
-<a href="https://wa.me/528126562962">Cotizar por WhatsApp</a>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <h1>RYR GARCÍA</h1>
+        <p>Compresores nuevos • Cotización rápida por WhatsApp • Envíos a todo México</p>
+        <div class="pillbar">
+          <span class="pill">✅ Nuevos</span>
+          <span class="pill">📦 Envíos</span>
+          <span class="pill">🧾 Facturación (si aplica)</span>
+          <span class="pill">📍 Monterrey, NL</span>
+        </div>
+      </div>
+      <div class="hero" style="max-width:360px">
+        <div><strong>¿Quieres cotizar rápido?</strong></div>
+        <div style="margin-top:6px;color:var(--muted)">Toca un producto y te abre WhatsApp con el modelo listo.</div>
+        <div class="actions">
+          <a class="btn primary" href="#catalogo">Ver catálogo</a>
+          <a class="btn" id="topQuoteBtn" href="#">Cotizar por WhatsApp</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="grid" id="catalogo">
+      <div class="filters">
+        <div class="filters-row">
+          <input id="search" type="search" placeholder="Buscar por modelo (ej. ZP14KAE)..." />
+          <select id="filterBrand">
+            <option value="">Marca: Todas</option>
+            <option value="COPELAND">COPELAND</option>
+            <option value="OTRA">OTRA</option>
+          </select>
+          <select id="filterRef">
+            <option value="">Refrigerante: Todos</option>
+            <option value="R22">R22</option>
+            <option value="R404A">R404A</option>
+            <option value="R507">R507</option>
+            <option value="R410A">R410A</option>
+          </select>
+        </div>
+        <small>Mostrando <span id="count"></span> productos.</small>
+      </div>
+
+      <div class="cards" id="cards"></div>
+
+      <footer>
+        <div>© <span id="year"></span> RYR GARCÍA. Catálogo informativo. Precios y disponibilidad pueden cambiar.</div>
+      </footer>
+    </section>
+  </div>
+
+  <a class="wa-float" id="waFloat" href="#" aria-label="Cotizar por WhatsApp">
+    <svg class="wa-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <path d="M16 3C9.1 3 3.5 8.4 3.5 15.1c0 2.5.8 4.9 2.2 6.9L4 29l7.2-1.9c1.9 1 4.1 1.6 6.3 1.6
+      6.9 0 12.5-5.4 12.5-12.1C30 8.4 22.9 3 16 3z" fill="#06230f" opacity=".12"/>
+      <path d="M26.7 15.6c0 5.8-4.8 10.5-10.7 10.5-2.1 0-4.1-.6-5.8-1.6l-3.9 1 1-3.7
+      c-1.1-1.7-1.7-3.6-1.7-5.7C5.6 10.3 10.4 5.6 16.3 5.6c5.9 0 10.4 4.2 10.4 10z" fill="#06230f" opacity=".18"/>
+      <path d="M13.4 11.2c-.2-.5-.4-.5-.7-.5h-.6c-.2 0-.6.1-.9.5-.3.4-1.1 1.1-1.1 2.7s1.1 3.1 1.3 3.3
+      c.2.2 2.1 3.3 5.1 4.5 2.5 1 3 0.8 3.6 0.7.6-.1 1.9-.8 2.2-1.6.3-.8.3-1.4.2-1.6
+      -.1-.2-.3-.3-.7-.5-.4-.2-1.9-1-2.2-1.1-.3-.1-.5-.2-.8.2-.3.4-1 1.1-1.2 1.3
+      -.2.2-.4.3-.8.1-.4-.2-1.6-.6-3.1-2-.8-.7-1.3-1.6-1.5-1.9-.2-.4 0-.6.2-.8
+      .2-.2.4-.5.6-.7.2-.2.3-.4.4-.6.1-.2.1-.4 0-.6-.1-.2-.8-2.1-1-2.5z" fill="#06230f"/>
+    </svg>
+    WhatsApp
+  </a>
+
+  <script>
+    // ✅ CAMBIA AQUÍ TU WHATSAPP (México: 521 + número)
+    const WHATSAPP_NUMBER = "528115557477"; // <-- CAMBIA ESTO
+
+    const products = [
+      // Edita estos 20 con tus datos reales:
+      { brand:"COPELAND", model:"ZP14KAE-PFV-130", ref:"R410A", volts:"220V", phase:"MONOFÁSICO", price:"$3,000 MXN" },
+      { brand:"COPELAND", model:"ZS21KAE-TF5-818", ref:"R22/R404A/R507", volts:"220V", phase:"TRIFÁSICO", price:"$10,000 MXN" },
+      { brand:"COPELAND", model:"ZP19KAE-PFV-130", ref:"R410A", volts:"220V", phase:"MONOFÁSICO", price:"Cotizar" },
+      { brand:"COPELAND", model:"ZP25KCE-PFV-130", ref:"R410A", volts:"220V", phase:"MONOFÁSICO", price:"Cotizar" },
+      { brand:"COPELAND", model:"ZP31KCE-PFV-130", ref:"R410A", volts:"220V", phase:"MONOFÁSICO", price:"Cotizar" },
+      { brand:"COPELAND", model:"ZP36K5E-PFV-130", ref:"R410A", volts:"220V", phase:"MONOFÁSICO", price:"Cotizar" },
+      { brand:"COPELAND", model:"ZP42K5E-PFV-130", ref:"R410A", volts:"220V", phase:"MONOFÁSICO", price:"Cotizar" },
+      { brand:"COPELAND", model:"ZP49K5E-PFV-130", ref:"R410A", volts:"220V", phase:"MONOFÁSICO", price:"Cotizar" },
+      { brand:"COPELAND", model:"ZP57K5E-PFV-130", ref:"R410A", volts:"220V", phase:"MONOFÁSICO", price:"Cotizar" },
+      { brand:"COPELAND", model:"ZP61KCE-PFV-130", ref:"R410A", volts:"220V", phase:"MONOFÁSICO", price:"Cotizar" },
+
+      { brand:"COPELAND", model:"ZR28K3E-PFV-130", ref:"R22", volts:"220V", phase:"MONOFÁSICO", price:"Cotizar" },
+      { brand:"COPELAND", model:"ZR34K3E-PFV-130", ref:"R22", volts:"220V", phase:"MONOFÁSICO", price:"Cotizar" },
+      { brand:"COPELAND", model:"ZR40K3E-PFV-130", ref:"R22", volts:"220V", phase:"MONOFÁSICO", price:"Cotizar" },
+      { brand:"COPELAND", model:"ZR47K3E-PFV-130", ref:"R22", volts:"220V", phase:"MONOFÁSICO", price:"Cotizar" },
+      { brand:"COPELAND", model:"ZR61KCE-PFV-130", ref:"R22", volts:"220V", phase:"MONOFÁSICO", price:"Cotizar" },
+
+      { brand:"COPELAND", model:"ZB15KQ-TFD-558", ref:"R404A/R507", volts:"220V", phase:"TRIFÁSICO", price:"Cotizar" },
+      { brand:"COPELAND", model:"ZB21KQ-TFD-558", ref:"R404A/R507", volts:"220V", phase:"TRIFÁSICO", price:"Cotizar" },
+      { brand:"COPELAND", model:"ZB29KQ-TFD-558", ref:"R404A/R507", volts:"220V", phase:"TRIFÁSICO", price:"Cotizar" },
+      { brand:"COPELAND", model:"ZB38KQ-TFD-558", ref:"R404A/R507", volts:"220V", phase:"TRIFÁSICO", price:"Cotizar" },
+      { brand:"COPELAND", model:"ZB45KQ-TFD-558", ref:"R404A/R507", volts:"220V", phase:"TRIFÁSICO", price:"Cotizar" },
+    ];
+
+    const cards = document.getElementById("cards");
+    const search = document.getElementById("search");
+    const filterBrand = document.getElementById("filterBrand");
+    const filterRef = document.getElementById("filterRef");
+    const count = document.getElementById("count");
+
+    function waLink(message){
+      const text = encodeURIComponent(message);
+      return `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
+    }
+
+    function render(){
+      const q = (search.value || "").trim().toUpperCase();
+      const b = filterBrand.value;
+      const r = filterRef.value;
+
+      const filtered = products.filter(p=>{
+        const matchQ = !q || (p.model + " " + p.brand + " " + p.ref).toUpperCase().includes(q);
+        const matchB = !b || p.brand === b;
+        const matchR = !r || (p.ref || "").toUpperCase().includes(r);
+        return matchQ && matchB && matchR;
+      });
+
+      cards.innerHTML = "";
+      filtered.forEach(p=>{
+        const msg = `Hola, quiero cotizar el compresor ${p.brand} ${p.model}. Refrigerante: ${p.ref}. Voltaje: ${p.volts}. Fase: ${p.phase}.`;
+        const el = document.createElement("div");
+        el.className = "card";
+        el.innerHTML = `
+          <div>
+            <h3>${p.brand} ${p.model}</h3>
+            <div class="meta">
+              <span class="chip">Refrigerante: ${p.ref}</span>
+              <span class="chip">${p.volts}</span>
+              <span class="chip">${p.phase}</span>
+              <span class="chip">NUEVO</span>
+            </div>
+            <div class="price">${p.price}</div>
+            <div class="note">Cotiza disponibilidad y envío por WhatsApp.</div>
+          </div>
+          <div class="right">
+            <div class="cta">
+              <a class="btn primary" target="_blank" rel="noopener" href="${waLink(msg)}">Solicitar cotización</a>
+              <a class="btn" target="_blank" rel="noopener" href="${waLink(`Hola, me interesa su catálogo de compresores nuevos.`)}">Preguntar</a>
+            </div>
+          </div>
+        `;
+        cards.appendChild(el);
+      });
+
+      count.textContent = filtered.length;
+    }
+
+    // Botón WhatsApp superior y flotante
+    document.getElementById("topQuoteBtn").href = waLink("Hola, quiero cotizar compresores nuevos. ¿Me pueden ayudar?");
+    document.getElementById("topQuoteBtn").target = "_blank";
+    document.getElementById("topQuoteBtn").rel = "noopener";
+
+    document.getElementById("waFloat").href = waLink("Hola, quiero cotizar compresores nuevos. ¿Me pueden ayudar?");
+    document.getElementById("waFloat").target = "_blank";
+    document.getElementById("waFloat").rel = "noopener";
+
+    // Año
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Eventos
+    ["input","change"].forEach(evt=>{
+      search.addEventListener(evt, render);
+      filterBrand.addEventListener(evt, render);
+      filterRef.addEventListener(evt, render);
+    });
+
+    render();
+  </script>
 </body>
 </html>
