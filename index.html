@@ -4,33 +4,127 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>RYR GARCÍA | Compresores</title>
+
 <style>
+:root{
+  --bg:#0b0f14;
+  --text:#ffffff;
+  --muted:#9fb0c0;
+  --accent:#22c55e;
+  --line:#1f2a37;
+}
+
 body {
   margin:0;
   font-family: Arial, sans-serif;
-  background:#0b0f14;
-  color:white;
-  text-align:center;
+  background:var(--bg);
+  color:var(--text);
 }
+
+/* NAVBAR */
+.navbar{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(11,15,20,.92);
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:1100px;
+  margin:0 auto;
+  padding:12px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.nav-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.nav-logo{
+  height:70px; /* logo grande */
+  width:auto;
+}
+.nav-links{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.nav-links a{
+  color:var(--text);
+  text-decoration:none;
+  font-weight:700;
+  font-size:14px;
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid transparent;
+}
+.nav-links a:hover{
+  border-color:var(--line);
+  background:#0f172a;
+}
+.nav-cta{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.nav-cta a{
+  text-decoration:none;
+  font-weight:900;
+  font-size:14px;
+  padding:10px 12px;
+  border-radius:12px;
+}
+.nav-cta .btn-wa{
+  background:var(--accent);
+  color:#06230f;
+}
+.nav-cta .btn-cat{
+  border:1px solid var(--line);
+  color:var(--text);
+  background:#0f172a;
+}
+@media(max-width:720px){
+  .nav-inner{flex-direction:column; align-items:flex-start;}
+  .nav-cta{width:100%;}
+}
+
+/* HERO */
 header {
+  text-align:center;
   padding:60px 20px;
 }
 .logo {
-  max-height:120px;
+  max-height:140px; /* más grande */
+  width:auto;
 }
 .btn {
   display:inline-block;
   margin-top:30px;
   padding:15px 25px;
-  background:#22c55e;
+  background:var(--accent);
   color:#06230f;
   text-decoration:none;
   font-weight:bold;
   border-radius:10px;
 }
 
+/* SECCIONES */
+.section{
+  max-width:1100px;
+  margin:0 auto;
+  padding:30px 16px;
+  text-align:center;
+}
+.section p{ color: var(--muted); }
+</style>
 </head>
+
 <body>
+
 <div class="navbar">
   <div class="nav-inner">
     <div class="nav-left">
@@ -40,8 +134,8 @@ header {
       <div class="nav-links">
         <a href="index.html">Inicio</a>
         <a href="catalogo.html">Productos</a>
-        <a href="index.html#contacto">Contacto</a>
-        <a href="index.html#ubicacion">Ubicación</a>
+        <a href="#contacto">Contacto</a>
+        <a href="#ubicacion">Ubicación</a>
       </div>
     </div>
 
@@ -51,29 +145,35 @@ header {
     </div>
   </div>
 </div>
+
 <header>
-  <img src="logo.png" class="logo">
-  <h1>RYR GARCÍA</h1>
-  <p>Especialistas en compresores nuevos</p>
+  <img src="logo.png" class="logo" alt="RYR GARCÍA">
+  <h1 style="margin:10px 0 6px;">RYR GARCÍA</h1>
+  <p style="margin:0;color:#9fb0c0;">Especialistas en compresores nuevos</p>
 
   <a href="catalogo.html" class="btn">Ver Catálogo</a>
 </header>
+
+<section id="contacto" class="section">
+  <h2>Contacto</h2>
+  <p>WhatsApp: <strong style="color:#fff;">(81) 1555 7477</strong></p>
+  <p>Correo: <strong style="color:#fff;">ventas@ryrgarcia.com.mx</strong></p>
+</section>
+
+<section id="ubicacion" class="section">
+  <h2>Ubicación</h2>
+  <p>Monterrey, Nuevo León, México</p>
+  <a class="btn" target="_blank" rel="noopener"
+     href="https://maps.app.goo.gl/2iKxBAbL4ocBiabn9">Ver en Google Maps</a>
+</section>
+
 <script>
-  const WHATSAPP_NUMBER = "528115557477"; // CAMBIA A TU NUMERO
+  const WHATSAPP_NUMBER = "5218115557477"; // ✅ RECOMENDADO: 521 + tu número (10 dígitos)
   const navWaBtn = document.getElementById("navWaBtn");
   if(navWaBtn){
     navWaBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hola, quiero cotizar compresores nuevos.")}`;
   }
 </script>
-  <section id="contacto" style="max-width:1100px;margin:0 auto;padding:30px 16px;">
-  <h2>Contacto</h2>
-  <p>WhatsApp: <strong>81 3256 2218</strong></p>
-  <p>Correo: <strong>ventas@ryrgarcia.com.mx</strong></p>
-</section>
 
-<section id="ubicacion" style="max-width:1100px;margin:0 auto;padding:30px 16px;">
-  <h2>Ubicación</h2>
-  <p>Monterrey, Nuevo León, México</p>
-</section>
 </body>
 </html>
