@@ -128,6 +128,12 @@ header {
 
   <a href="catalogo.html" class="btn">Ver Catálogo</a>
 </header>
-
+<script>
+  const WHATSAPP_NUMBER = "5218132562218"; // CAMBIA A TU NUMERO
+  const navWaBtn = document.getElementById("navWaBtn");
+  if(navWaBtn){
+    navWaBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hola, quiero cotizar compresores nuevos.")}`;
+  }
+</script>
 </body>
 </html>
