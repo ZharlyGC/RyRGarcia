@@ -21,14 +21,85 @@ body{
   background:var(--bg);
   color:var(--text);
 }
+
+/* NAVBAR */
+.navbar{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(11,15,20,.92);
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:1100px;
+  margin:0 auto;
+  padding:12px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.nav-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.nav-logo{
+  height:70px; /* logo más grande */
+  width:auto;
+}
+.nav-links{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.nav-links a{
+  color:var(--text);
+  text-decoration:none;
+  font-weight:700;
+  font-size:14px;
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid transparent;
+}
+.nav-links a:hover{
+  border-color:var(--line);
+  background:#0f172a;
+}
+.nav-cta{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.nav-cta a{
+  text-decoration:none;
+  font-weight:900;
+  font-size:14px;
+  padding:10px 12px;
+  border-radius:12px;
+}
+.nav-cta .btn-wa{
+  background:var(--accent);
+  color:#06230f;
+}
+.nav-cta .btn-cat{
+  border:1px solid var(--line);
+  color:var(--text);
+  background:#0f172a;
+}
+@media(max-width:720px){
+  .nav-inner{flex-direction:column; align-items:flex-start;}
+  .nav-cta{width:100%;}
+}
+
 header{
   padding:30px 20px;
   text-align:center;
   border-bottom:1px solid var(--line);
 }
-header h1{
-  margin:0;
-}
+header h1{ margin:0; }
+
 .container{
   max-width:1100px;
   margin:auto;
@@ -45,9 +116,8 @@ header h1{
   border-radius:15px;
   border:1px solid var(--line);
 }
-.card h3{
-  margin:0 0 10px;
-}
+.card h3{ margin:0 0 10px; }
+
 .chip{
   display:inline-block;
   font-size:12px;
@@ -82,11 +152,12 @@ header h1{
   font-weight:bold;
   text-decoration:none;
 }
-
+</style>
 </head>
 
 <body>
-  <div class="navbar">
+
+<div class="navbar">
   <div class="nav-inner">
     <div class="nav-left">
       <a href="index.html" aria-label="Ir a inicio">
@@ -116,58 +187,60 @@ header h1{
   <div class="grid" id="catalogo"></div>
 </div>
 
-<a class="wa-float" id="waFloat" target="_blank">WhatsApp</a>
+<a class="wa-float" id="waFloat" target="_blank" rel="noopener">WhatsApp</a>
 
 <script>
-const WHATSAPP_NUMBER = "528115557477"; // CAMBIA A TU NUMERO
+const WHATSAPP_NUMBER = "528115557477"; // ✅ Tu número
 
 const products = [
-{model:"ZP14KAE-PFV-130", ref:"R410A", volts:"220V", phase:"Monofásico"},
-{model:"ZS21KAE-TF5-818", ref:"R22/R404A/R507", volts:"220V", phase:"Trifásico"},
-{model:"ZP19KAE-PFV-130", ref:"R410A", volts:"220V", phase:"Monofásico"},
-{model:"ZP25KCE-PFV-130", ref:"R410A", volts:"220V", phase:"Monofásico"},
-{model:"ZP31KCE-PFV-130", ref:"R410A", volts:"220V", phase:"Monofásico"},
-{model:"ZP36K5E-PFV-130", ref:"R410A", volts:"220V", phase:"Monofásico"},
-{model:"ZP42K5E-PFV-130", ref:"R410A", volts:"220V", phase:"Monofásico"},
-{model:"ZP49K5E-PFV-130", ref:"R410A", volts:"220V", phase:"Monofásico"},
-{model:"ZP57K5E-PFV-130", ref:"R410A", volts:"220V", phase:"Monofásico"},
-{model:"ZP61KCE-PFV-130", ref:"R410A", volts:"220V", phase:"Monofásico"},
-{model:"ZR28K3E-PFV-130", ref:"R22", volts:"220V", phase:"Monofásico"},
-{model:"ZR34K3E-PFV-130", ref:"R22", volts:"220V", phase:"Monofásico"},
-{model:"ZR40K3E-PFV-130", ref:"R22", volts:"220V", phase:"Monofásico"},
-{model:"ZR47K3E-PFV-130", ref:"R22", volts:"220V", phase:"Monofásico"},
-{model:"ZR61KCE-PFV-130", ref:"R22", volts:"220V", phase:"Monofásico"},
-{model:"ZB15KQ-TFD-558", ref:"R404A/R507", volts:"220V", phase:"Trifásico"},
-{model:"ZB21KQ-TFD-558", ref:"R404A/R507", volts:"220V", phase:"Trifásico"},
-{model:"ZB29KQ-TFD-558", ref:"R404A/R507", volts:"220V", phase:"Trifásico"},
-{model:"ZB38KQ-TFD-558", ref:"R404A/R507", volts:"220V", phase:"Trifásico"},
-{model:"ZB45KQ-TFD-558", ref:"R404A/R507", volts:"220V", phase:"Trifásico"}
+  {model:"ZP14KAE-PFV-130", ref:"R410A", volts:"220V", phase:"Monofásico"},
+  {model:"ZS21KAE-TF5-818", ref:"R22/R404A/R507", volts:"220V", phase:"Trifásico"},
+  {model:"ZP19KAE-PFV-130", ref:"R410A", volts:"220V", phase:"Monofásico"},
+  {model:"ZP25KCE-PFV-130", ref:"R410A", volts:"220V", phase:"Monofásico"},
+  {model:"ZP31KCE-PFV-130", ref:"R410A", volts:"220V", phase:"Monofásico"},
+  {model:"ZP36K5E-PFV-130", ref:"R410A", volts:"220V", phase:"Monofásico"},
+  {model:"ZP42K5E-PFV-130", ref:"R410A", volts:"220V", phase:"Monofásico"},
+  {model:"ZP49K5E-PFV-130", ref:"R410A", volts:"220V", phase:"Monofásico"},
+  {model:"ZP57K5E-PFV-130", ref:"R410A", volts:"220V", phase:"Monofásico"},
+  {model:"ZP61KCE-PFV-130", ref:"R410A", volts:"220V", phase:"Monofásico"},
+  {model:"ZR28K3E-PFV-130", ref:"R22", volts:"220V", phase:"Monofásico"},
+  {model:"ZR34K3E-PFV-130", ref:"R22", volts:"220V", phase:"Monofásico"},
+  {model:"ZR40K3E-PFV-130", ref:"R22", volts:"220V", phase:"Monofásico"},
+  {model:"ZR47K3E-PFV-130", ref:"R22", volts:"220V", phase:"Monofásico"},
+  {model:"ZR61KCE-PFV-130", ref:"R22", volts:"220V", phase:"Monofásico"},
+  {model:"ZB15KQ-TFD-558", ref:"R404A/R507", volts:"220V", phase:"Trifásico"},
+  {model:"ZB21KQ-TFD-558", ref:"R404A/R507", volts:"220V", phase:"Trifásico"},
+  {model:"ZB29KQ-TFD-558", ref:"R404A/R507", volts:"220V", phase:"Trifásico"},
+  {model:"ZB38KQ-TFD-558", ref:"R404A/R507", volts:"220V", phase:"Trifásico"},
+  {model:"ZB45KQ-TFD-558", ref:"R404A/R507", volts:"220V", phase:"Trifásico"}
 ];
+
+function waLink(text){
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+}
 
 function render(){
   const container = document.getElementById("catalogo");
-  container.innerHTML="";
+  container.innerHTML = "";
   products.forEach(p=>{
     const msg = `Hola, quiero cotizar el compresor ${p.model}. Refrigerante: ${p.ref}. Voltaje: ${p.volts}. Fase: ${p.phase}.`;
     const card = document.createElement("div");
     card.className="card";
-    card.innerHTML=`
+    card.innerHTML = `
       <h3>${p.model}</h3>
       <span class="chip">${p.ref}</span>
       <span class="chip">${p.volts}</span>
       <span class="chip">${p.phase}</span>
       <span class="chip">NUEVO</span>
       <div class="price">Cotizar</div>
-      <a class="btn" target="_blank" href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}">
-        Solicitar cotización
-      </a>
+      <a class="btn" target="_blank" rel="noopener" href="${waLink(msg)}">Solicitar cotización</a>
     `;
     container.appendChild(card);
   });
 }
 
-document.getElementById("waFloat").href =
-`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hola, quiero información sobre sus compresores nuevos.")}`;
+document.getElementById("waFloat").href = waLink("Hola, quiero información sobre sus compresores nuevos.");
+document.getElementById("navWaBtn").href = waLink("Hola, quiero cotizar compresores nuevos.");
 
 render();
 </script>
