@@ -23,7 +23,7 @@ body{
   text-align:center;
 }
 
-/* NAVBAR */
+/* NAVBAR (RESPONSIVE) */
 .navbar{
   position:sticky;
   top:0;
@@ -40,21 +40,25 @@ body{
   display:flex;
   align-items:center;
   justify-content:space-between;
+  gap:12px;
 }
 
 .nav-left{
   display:flex;
   align-items:center;
   gap:18px;
+  flex-wrap:wrap;           /* ✅ clave */
 }
 
 .nav-logo{
   height:65px;
+  width:auto;               /* ✅ */
 }
 
 .nav-links{
   display:flex;
   gap:10px;
+  flex-wrap:wrap;           /* ✅ clave */
 }
 
 .nav-links a{
@@ -63,15 +67,18 @@ body{
   font-weight:bold;
   padding:10px 12px;
   border-radius:12px;
+  border:1px solid transparent;
 }
 
 .nav-links a:hover{
+  border-color:var(--line);
   background:#0f172a;
 }
 
 .nav-cta{
   display:flex;
   gap:10px;
+  flex-wrap:wrap;           /* ✅ clave */
 }
 
 .btn-cat{
@@ -93,8 +100,18 @@ body{
   font-weight:900;
 }
 
-/* CONTENIDO */
+/* ✅ En móvil, apila el menú como en tus otras páginas */
+@media(max-width:720px){
+  .nav-inner{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+  .nav-cta{
+    width:100%;
+  }
+}
 
+/* CONTENIDO */
 .container{
   max-width:900px;
   margin:auto;
@@ -113,7 +130,6 @@ body{
 }
 
 /* BOTÓN WHATSAPP FLOTANTE */
-
 .wa-float{
   position:fixed;
   right:20px;
@@ -135,8 +151,8 @@ body{
   <div class="nav-inner">
     <div class="nav-left">
 
-      <a href="index.html">
-        <img src="logo.png" class="nav-logo">
+      <a href="index.html" aria-label="Inicio">
+        <img src="logo.png" class="nav-logo" alt="RYR GARCÍA">
       </a>
 
       <div class="nav-links">
@@ -150,39 +166,32 @@ body{
 
     <div class="nav-cta">
       <a class="btn-cat" href="catalogo.html">Ver Catálogo</a>
-      <a class="btn-wa" id="navWaBtn" target="_blank">WhatsApp</a>
+      <a class="btn-wa" id="navWaBtn" target="_blank" rel="noopener">WhatsApp</a>
     </div>
 
   </div>
 </div>
 
 <div class="container">
+  <h1>Nuestra Ubicación</h1>
+  <p style="color:var(--muted);">Monterrey, Nuevo León, México</p>
 
-<h1>Nuestra Ubicación</h1>
-
-<p>Monterrey, Nuevo León, México</p>
-
-<a class="btn"
-href="https://maps.app.goo.gl/2iKxBAbL4ocBiabn9"
-target="_blank">
-Abrir en Google Maps
-</a>
-
+  <a class="btn"
+     href="https://maps.app.goo.gl/2iKxBAbL4ocBiabn9"
+     target="_blank" rel="noopener">
+    Abrir en Google Maps
+  </a>
 </div>
 
-<a class="wa-float" id="waFloat" target="_blank">WhatsApp</a>
+<a class="wa-float" id="waFloat" target="_blank" rel="noopener">WhatsApp</a>
 
 <script>
-
 const WHATSAPP_NUMBER = "5218115557477";
-
 const message = "Hola, quiero información sobre sus compresores.";
-
 const link = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
 document.getElementById("navWaBtn").href = link;
 document.getElementById("waFloat").href = link;
-
 </script>
 
 </body>
