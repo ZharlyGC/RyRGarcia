@@ -44,9 +44,83 @@ border-radius:8px;
 font-weight:bold;
 }
 </style>
+  .navbar{
+position:sticky;
+top:0;
+background:#0b0f14;
+border-bottom:1px solid #1f2a37;
+}
+
+.nav-inner{
+max-width:1100px;
+margin:auto;
+padding:10px 20px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+
+.nav-left{
+display:flex;
+align-items:center;
+gap:20px;
+}
+
+.nav-logo{
+height:60px;
+}
+
+.nav-links a{
+color:white;
+text-decoration:none;
+margin-right:15px;
+font-weight:bold;
+}
+
+.nav-links a:hover{
+color:#22c55e;
+}
+
+.btn-cat{
+background:#0f172a;
+padding:8px 15px;
+border-radius:8px;
+text-decoration:none;
+color:white;
+}
+
+.btn-wa{
+background:#22c55e;
+padding:8px 15px;
+border-radius:8px;
+text-decoration:none;
+color:#06230f;
+font-weight:bold;
+}
 </head>
 
 <body>
+  <div class="navbar">
+  <div class="nav-inner">
+    <div class="nav-left">
+      <a href="index.html">
+        <img src="logo.png" alt="RYR GARCÍA" class="nav-logo">
+      </a>
+
+      <div class="nav-links">
+        <a href="index.html">Inicio</a>
+        <a href="catalogo.html">Productos</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="ubicacion.html">Ubicación</a>
+      </div>
+    </div>
+
+    <div class="nav-cta">
+      <a class="btn-cat" href="catalogo.html">Ver Catálogo</a>
+      <a class="btn-wa" id="navWaBtn" target="_blank">WhatsApp</a>
+    </div>
+  </div>
+</div>
 
 <div class="container">
 
