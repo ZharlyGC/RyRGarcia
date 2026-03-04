@@ -43,9 +43,10 @@ body {
   display:flex;
   align-items:center;
   gap:12px;
+  flex-wrap:wrap;
 }
 .nav-logo{
-  height:70px; /* logo grande */
+  height:70px;
   width:auto;
 }
 .nav-links{
@@ -92,24 +93,131 @@ body {
   .nav-cta{width:100%;}
 }
 
-/* HERO */
-header {
+/* ===== HERO SLIDER ===== */
+.hero-slider{
+  position:relative;
+  width:100%;
+  height:520px;
+  overflow:hidden;
+  border-bottom:1px solid var(--line);
+  background:#000;
+}
+
+.hs-track{
+  height:100%;
+  display:flex;
+  transition:transform 600ms ease;
+  will-change: transform;
+}
+
+.hs-slide{
+  min-width:100%;
+  height:100%;
+}
+
+.hs-slide img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+/* overlay oscuro para que el texto se lea */
+.hero-slider::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.25) 55%, rgba(0,0,0,.15) 100%);
+  pointer-events:none;
+}
+
+.hs-overlay{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  z-index:5;
   text-align:center;
-  padding:60px 20px;
+  padding:0 16px;
 }
-.logo {
-  max-height:140px; /* más grande */
-  width:auto;
+
+.hs-overlay h1{
+  margin:0;
+  font-size:34px;
+  letter-spacing:.8px;
+  color:#fff;
+  text-shadow:0 10px 25px rgba(0,0,0,.35);
 }
-.btn {
+
+.hs-overlay p{
+  margin:10px 0 0;
+  color:rgba(255,255,255,.85);
+  font-weight:700;
+}
+
+.hs-btn{
   display:inline-block;
-  margin-top:30px;
-  padding:15px 25px;
+  margin-top:18px;
+  padding:14px 22px;
   background:var(--accent);
   color:#06230f;
   text-decoration:none;
-  font-weight:bold;
-  border-radius:10px;
+  border-radius:12px;
+  font-weight:900;
+}
+
+/* Flechas */
+.hs-arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:6;
+  width:46px;
+  height:46px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.25);
+  background:rgba(15,23,42,.55);
+  color:#fff;
+  font-size:28px;
+  line-height:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  user-select:none;
+}
+.hs-arrow:hover{ background:rgba(15,23,42,.75); }
+.hs-prev{ left:14px; }
+.hs-next{ right:14px; }
+
+/* Dots */
+.hs-dots{
+  position:absolute;
+  left:50%;
+  bottom:16px;
+  transform:translateX(-50%);
+  z-index:6;
+  display:flex;
+  gap:8px;
+}
+.hs-dot{
+  width:10px;
+  height:10px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.45);
+  background:rgba(255,255,255,.18);
+  cursor:pointer;
+}
+.hs-dot.active{
+  background:var(--accent);
+  border-color:rgba(0,0,0,0);
+}
+
+/* Responsive */
+@media(max-width:720px){
+  .hero-slider{ height:420px; }
+  .hs-overlay h1{ font-size:22px; }
+  .hs-arrow{ width:42px; height:42px; font-size:26px; }
 }
 
 /* SECCIONES */
@@ -146,17 +254,118 @@ header {
   </div>
 </div>
 
-<header>
+<!-- SLIDER -->
+<section class="hero-slider" aria-label="Slider de compresores">
+  <div class="hs-track" id="hsTrack">
+    <div class="hs-slide">
+      <img src="slider1.jpg" alt="Compresores disponibles">
+    </div>
+    <div class="hs-slide">
+      <img src="slider2.jpg" alt="Compresores en catálogo">
+    </div>
+  </div>
 
-</header>
+  <div class="hs-overlay">
+    <h1>COMPRESORES NUEVOS</h1>
+    <p>Inventario disponible • Cotiza por WhatsApp</p>
+    <a class="hs-btn" href="catalogo.html">Ver catálogo</a>
+  </div>
 
+  <button class="hs-arrow hs-prev" id="hsPrev" aria-label="Anterior">‹</button>
+  <button class="hs-arrow hs-next" id="hsNext" aria-label="Siguiente">›</button>
+
+  <div class="hs-dots" id="hsDots" aria-label="Indicadores"></div>
+</section>
 
 <script>
-  const WHATSAPP_NUMBER = "5218115557477"; // ✅ RECOMENDADO: 521 + tu número (10 dígitos)
+  // WhatsApp del menú
+  const WHATSAPP_NUMBER = "5218115557477";
   const navWaBtn = document.getElementById("navWaBtn");
   if(navWaBtn){
     navWaBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hola, quiero cotizar compresores nuevos.")}`;
   }
+
+  // Slider auto + manual
+  (() => {
+    const track = document.getElementById("hsTrack");
+    const prevBtn = document.getElementById("hsPrev");
+    const nextBtn = document.getElementById("hsNext");
+    const dotsWrap = document.getElementById("hsDots");
+    const slider = document.querySelector(".hero-slider");
+    if(!track || !prevBtn || !nextBtn || !dotsWrap || !slider) return;
+
+    const slides = Array.from(track.children);
+    const total = slides.length;
+    let index = 0;
+    let timer = null;
+    const INTERVAL_MS = 5000; // cambia cada 5s
+
+    // Crear dots
+    dotsWrap.innerHTML = "";
+    slides.forEach((_, i) => {
+      const d = document.createElement("button");
+      d.className = "hs-dot" + (i === 0 ? " active" : "");
+      d.type = "button";
+      d.setAttribute("aria-label", `Ir al slide ${i+1}`);
+      d.addEventListener("click", () => goTo(i, true));
+      dotsWrap.appendChild(d);
+    });
+
+    const dots = Array.from(dotsWrap.children);
+
+    function update(){
+      track.style.transform = `translateX(-${index * 100}%)`;
+      dots.forEach((d,i)=> d.classList.toggle("active", i === index));
+    }
+
+    function goTo(i, userAction=false){
+      index = (i + total) % total;
+      update();
+      if(userAction) restart();
+    }
+
+    function next(){ goTo(index + 1, true); }
+    function prev(){ goTo(index - 1, true); }
+
+    prevBtn.addEventListener("click", prev);
+    nextBtn.addEventListener("click", next);
+
+    function start(){
+      stop();
+      timer = setInterval(() => {
+        index = (index + 1) % total;
+        update();
+      }, INTERVAL_MS);
+    }
+    function stop(){
+      if(timer) clearInterval(timer);
+      timer = null;
+    }
+    function restart(){ start(); }
+
+    // Pausa al hover (PC)
+    slider.addEventListener("mouseenter", stop);
+    slider.addEventListener("mouseleave", start);
+
+    // Swipe en móvil
+    let startX = null;
+    slider.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+    }, {passive:true});
+
+    slider.addEventListener("touchend", (e) => {
+      if(startX === null) return;
+      const endX = e.changedTouches[0].clientX;
+      const dx = endX - startX;
+      if(Math.abs(dx) > 40){
+        dx > 0 ? prev() : next();
+      }
+      startX = null;
+    }, {passive:true});
+
+    update();
+    start();
+  })();
 </script>
 
 </body>
